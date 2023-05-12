@@ -69,10 +69,7 @@ There are multiple solutions for each challenge but we will describe here the de
 
 The boats leave from South of Portugal. They head south-east around the globe, sending data about their location every 60 seconds. 
 
-
 ![To Dashboard](dashboard.png)
-
-We’ve tracked them. And also looked at their performance. But what was our journey? How did we end up here? 
 
 We started off looking at various options and decided on the following architecture
 
@@ -84,9 +81,13 @@ We started off looking at various options and decided on the following architect
 
 ![Steps Taken](steps.png)
 
+We have connected python simulator with eventhub endpoint and name. It stars running.
 
 ![Verify Streaming](eventhub.png)
+
 On the eventhubs overview page we can verify that the streaming data is been received and is been outputted 
+
+
 ![Stream Analytics Outputs](streaming_job.png)
 In Azure Stream Analytics we created a streaming job with two outputs
 
@@ -107,10 +108,6 @@ Using this external table we then created a view to get speed statistics for eac
 
 ![Synapse View](ranking.png)
 As in the business case, the race started from portugal so we have taken portugal lattitide and longitude as starting points and caluclated the distance travelled from the starting place by boat and then caluclated rankings.
-
-
-
-
 
 Then we created reports using PowerBI. In powerBI, we have created a measure to change the speed in knots to km.
 # Completed Dashboard
