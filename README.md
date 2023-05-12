@@ -116,4 +116,4 @@ As in the business case, the race started from portugal so we have taken portuga
 Then we created reports using PowerBI. In powerBI, we have created a measure to change the speed in knots to km.
 # Completed Dashboard
 ![To Dashboard](dashboard.png)
-)
+
