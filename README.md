@@ -71,7 +71,7 @@ The boats leave from South of Portugal. They head south-east around the globe, s
 
 ![To Dashboard](dashboard.png)
 
-We started off looking at various options and decided on the following architecture
+To do this, we started off looking at various options and decided on the following architecture
 
 * An Event Hub for collecting sailing boat data. Phyton simulator was used to stream data to event hub
 * A Stream Analytics Job for processing the data in real time (hot tier) and in batches (cool tier)
@@ -95,18 +95,22 @@ In Azure Stream Analytics we created a streaming job with two outputs
 * outputpowerbi is our real time stream to Power BI service.In Power BI we used RouteMap visualisation to display the real time location and route taken for each boat
 
 ![Stream Analytics Query](Batch_output.png)
+
 For both the batch data and the streaming data we had to make queries. However as mentioned in the case, the Python app occasionally produces garbled data. In order to ensure that only clean data would arrive in the PowerBI dashboard and in the ADLS Gen2, both queries exclude any rows with invalid longitude or latitude values. For the ADLS Gen2 we CAST the values because some were being stored as integers, which did not work when we imported the data into Power BI. With TRY_CAST SQL returns the expression in the desired data type if the CAST function succeeds.  
 
 Each output required a query and it is here that we handled the invalid data that was been streamed. As you can see from this screen both queries exclude any rows with invalid longitute or latitude values.
 
-For the batch stream to ADLS Gen2 we also had to CAST the values as some values where been stored as Integers and were causing issues when we imported the data to Power Bi desktop. TRY_CAST function , which is similar to the CAST Function, is used to convert an expression from one data type to another. If it succeeds, then SQL TRY CAST will return the expression in the desired data type. Otherwise, it will return null. Its for this reason we then only select rows that are not null
 
 ![Synapse Batch Query](Batchlocation_data.png)
+
 In Synapse we created an external table using serverless pools. Serverless pools where used as they are low cost solution and allowed us to integrate easily to Power Bi Desktop
+
 ![Synapse View](speeds.png)
+
 Using this external table we then created a view to get speed statistics for each boat. A window row function was used to get the stats for each boat for last 24 hours and previous 24 hours. The query used assumes one message received per minute for each boat. 
 
 ![Synapse View](ranking.png)
+
 As in the business case, the race started from portugal so we have taken portugal lattitide and longitude as starting points and caluclated the distance travelled from the starting place by boat and then caluclated rankings.
 
 Then we created reports using PowerBI. In powerBI, we have created a measure to change the speed in knots to km.
