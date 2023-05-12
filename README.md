@@ -82,7 +82,7 @@ We started off looking at various options and decided on the following architect
 * Synapse serverless pools for collecting data batches and preforming batch calculations for ranking and for fun we added in other calculations for speed.
 * A Power BI dashboard for displaying both real time and batch data
 
-![Steps Taken](steps-overview.png)
+![Steps Taken](steps.png)
 
 
 ![Verify Streaming](eventhub.png)
@@ -105,9 +105,9 @@ In Synapse we created an external table using serverless pools. Serverless pools
 ![Synapse View](speeds.png)
 Using this external table we then created a view to get speed statistics for each boat. A window row function was used to get the stats for each boat for last 24 hours and previous 24 hours. The query used assumes one message received per minute for each boat. 
 
-![Synapse View](https://github.com/GrainneKennedy/VendeeGlobeBusinessCase/blob/main/rank.png?raw=true)
+![Synapse View](ranking.png)
 As in the business case, the race started from portugal so we have taken portugal lattitide and longitude as starting points and caluclated the distance travelled from the starting place by boat and then caluclated rankings.
-(rankings.png)
+
 
 
 
